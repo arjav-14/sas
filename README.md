@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NoteFlow — AI Collaborative Notes Workspace
 
-## Getting Started
+Full-stack notes app built with **Next.js (App Router)**, **JavaScript**, **Tailwind CSS**, **MongoDB + Mongoose**, **JWT auth**, and **Google Gemini AI**.
 
-First, run the development server:
+## Features
+
+- **Auth**: Signup/login, bcrypt passwords, JWT in httpOnly cookies, protected `/dashboard` routes
+- **Notes**: CRUD, auto-save, tags, categories, archive, sort by recently updated
+- **AI (Gemini)**: Summary, action items, suggested title per note
+- **Search**: Keyword search, filter by tag, archived view
+- **Sharing**: Public share links at `/shared/[shareId]`
+- **Dashboard**: Stats cards, top tags, recent notes, weekly activity chart (Recharts)
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy environment variables and fill in your values in `.env.local`:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Description |
+|----------|-------------|
+| `MONGODB_URI` | MongoDB connection string |
+| `JWT_SECRET` | Secret for signing JWT tokens |
+| `GEMINI_API_KEY` | Google AI Studio / Gemini API key |
+| `NEXT_PUBLIC_APP_URL` | App URL for share links (e.g. `http://localhost:3000`) |
+
+3. Run the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  api/          # REST API routes
+  dashboard/    # Protected workspace
+  login/ signup/
+  shared/       # Public share pages
+components/
+lib/            # mongodb, auth, gemini
+models/         # User, Note
+middleware.js   # Route protection
+```
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — development server
+- `npm run build` — production build
+- `npm start` — run production server
